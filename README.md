@@ -5,18 +5,15 @@ Centralized management of Subversion Hooks.
 ## Summary
 
   - [Getting Started](#getting-started)
-  - [Runing the tests](#running-the-tests)
-  - [Deployment](#deployment)
-  - [Built With](#built-with)
-  - [Contributing](#contributing)
-  - [Versioning](#versioning)
+  - [Prerequisites](#prerequisistes)
+  - [Installing](#installing)
   - [Authors](#authors)
   - [License](#license)
-  - [Acknowledgments](#acknowledgments)
 
 ## Getting Started
 
-
+You can manage all your hooks in a single location and deploy them in the different repositories only by editing a single(*) configuration file (hooks.cfg).
+(*) Some hooks scripts have their own configuration file.
 
 
 ### Prerequisites
@@ -26,29 +23,22 @@ You need to have Subversion server installed. This scripts have been tested in C
 
 ### Installing
 
-Copy 'pre' and 'post' folders to your SVN installation path (e.g. /opt/csvn/hooks/).
-'hooks.cfg' file must be copied to the 'hooks' directory of each repository where you want to use hooks.
+- Copy 'pre' and 'post' folders to your SVN installation path (e.g. /opt/csvn/hooks/).
+- Rename 'hooks.cfg.example' file to 'hooks.cfg' in 'hooks' directory of each repository where you want to use hooks. Edit the file according to your needs.
+- Create a link to pre-commit or/and post-commit file in pre and post folder en each hooks repository folder do you want to activate hooks.
 
     mkdir /opt/csvn/hooks/
     cp -R pre pro /opt/csvn/hooks/
-    cp hooks.cfg /opt/csvn/data/repositories/<repo>/hooks/
+    cp hooks.cfg.example /opt/csvn/data/repositories/<repo>/hooks/hooks.cfg
+    ln -s /opt/csvn/data/repositories/<repo>/hooks/pre-commit /opt/csvn/hooks/pre/pre-commit
+    ln -s /opt/csvn/data/repositories/<repo>/hooks/post-commit /opt/csvn/hooks/post/post-commit
     
-    
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code
-of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions
-available, see the [tags on this
-repository](https://github.com/PurpleBooth/a-good-readme-template/tags).
-
+        
 ## Authors
 
-  - **Daniel Muñoz** - *Provided README Template* -
-    [PurpleBooth](https://github.com/PurpleBooth)
+  - **Daniel Muñoz**
+    [danmfdez](https://github.com/danmfdez)
+
 
 ## License
 
