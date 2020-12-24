@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# POST-COMMIT HOOK
+REPOS="$1"
+REV="$2"
+
+SVNLOOK=/usr/bin/svnlook
+CFG_PATH="/opt/csvn/hooks_scripts"
+CFG_FILE="${REPOS}/hooks/hooks.cfg"
+CFG_VALUE="post-commit"
+
+source <(grep = <(grep -A1 "\[${CFG_VALUE}\]" ${CFG_FILE}))
+
+for cmd_value in ${post_comm_cmd//,/ }; do
+     #echo $cmd_value
+     ${CFG_PATH}/post/${cmd_value} "${REPOS}" "${REV}" 1>&2 || exit 2
+done
+
+#send mail
+#${REPOS}/hooks/commit_send_mail.sh "${REPOS}" "${REV}" 1>&2 || exit 2
+
+#jenkins job
+#${REPOS}/hooks/commit_jenkins_job.sh "${REPOS}" "${REV}" 1>&2 || exit 2
+
+
+exit 0

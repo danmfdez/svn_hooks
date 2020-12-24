@@ -1,0 +1,14 @@
+{
+  "jira.server.url" : "<jira_url>",
+  "jira.auth.token" : "<jira_token>",
+  "jira.notify.email" : "false",
+  "jira.issue.patterns" : [
+    "\\b(\\S+-\\d+)\\b",
+    "(\\[\\S+-\\d+\\])",
+    "(\\(\\S+-\\d+\\))",
+    "(\\[JIRA\\s+\\S+-\\d+\\])"
+  ],
+  "svn.branch.tags.processing" : false,
+  "svn.look.cmd.path" : "/usr/bin/svnlook",
+  "svn.server.web" : "<jira_url>/viewvc/{0}?view=revision&revision={1}"
+}
