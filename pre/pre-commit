@@ -1,0 +1,28 @@
+#!/bin/bash
+
+REPOS="$1"
+TXN="$2"
+
+SVNLOOK=/usr/bin/svnlook
+CFG_PATH="/opt/csvn/hooks_scripts"
+CFG_FILE="${REPOS}/hooks/hooks.cfg"
+CFG_VALUE="pre-commit"
+
+source <(grep = <(grep -A1 "\[${CFG_VALUE}\]" ${CFG_FILE}))
+
+for cmd_value in ${pre_comm_cmd//,/ }; do
+     #echo $cmd_value
+     ${CFG_PATH}/pre/${cmd_value} "${REPOS}" "${TXN}" 1>&2 || exit 2
+done
+
+
+# Check that the author of this commit has the rights to perform the commit
+#${REPOS}/hooks/commit_access_control.sh "${REPOS}" "${TXN}" 1>&2 || exit 2
+
+# Issue ID format
+#${REPOS}/hooks/commit_msg_id.sh "${REPOS}" "${TXN}" 1>&2 || exit 2
+
+# Check that commit message is more than X characters long
+#${REPOS}/hooks/commit_msg_length.sh "${REPOS}" "${TXN}" 1>&2 || exit 2
+
+exit 0
